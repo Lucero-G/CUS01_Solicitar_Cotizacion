@@ -15,6 +15,8 @@ export class LoginComponent {
   personas: any;
   solicitantes: any;
 
+  showPassword: boolean = false;
+
   constructor(private conexion: ConexionService, private router: Router,private usuarioService: NombreUsuarioService) {}
 
   ngOnInit(): void {
@@ -65,5 +67,9 @@ export class LoginComponent {
 
   registrarse(): void{
     this.router.navigateByUrl('/registro');
+  }
+  //para agregar el ojito a la contrasenia
+  mostrarPassword() {
+    this.showPassword = !this.showPassword;
   }
 }
