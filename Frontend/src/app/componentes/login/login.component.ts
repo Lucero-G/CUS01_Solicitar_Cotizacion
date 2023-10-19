@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ConexionService } from 'src/app/services/conexion.service';
 import { NombreUsuarioService } from 'src/app/services/nombre-usuario.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -50,18 +51,36 @@ export class LoginComponent {
         this.usuarioService.id = solicitanteEncontrado.id_solicitante;
         this.usuarioService.apellido1 = personaEncontrado.apellido_paterno;
         this.usuarioService.apellido2 = personaEncontrado.apellido_materno;
-        alert("Inicio de sesión exitoso");
+        Swal.fire({
+          icon: 'success',
+          title: 'Correcto',
+          text: 'Inicio de sesión exitoso.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
         this.router.navigateByUrl('/pagina1');
   
       } else {
         // Credenciales inválidas
         console.log("Credenciales inválidas");
-        alert("Credenciales inválidas");
+        Swal.fire({
+          icon: 'error',
+          title: 'Incorrecto',
+          text: 'Credenciales inválidas.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
       }
     }
     else{
       console.log("Credenciales inválidas");
-        alert("Credenciales inválidas");
+      Swal.fire({
+        icon: 'error',
+        title: 'Incorrecto',
+        text: 'Credenciales inválidas.',
+        confirmButtonColor: '#0b5ed7',
+        confirmButtonText: 'Aceptar',
+      });
     }
   }
 

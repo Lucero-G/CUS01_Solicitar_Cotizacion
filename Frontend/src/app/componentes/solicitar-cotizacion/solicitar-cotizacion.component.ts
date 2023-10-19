@@ -9,8 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import 'popper.js';
 import 'bootstrap-select';
 
-import * as $ from 'jquery';
-
+//import * as $ from 'jquery';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-solicitar-cotizacion',
   templateUrl: './solicitar-cotizacion.component.html',
@@ -264,11 +264,22 @@ export class SolicitarCotizacionComponent {
         control.markAllAsTouched();
       });
     } else {
-      const confirmacion = confirm("¿Está seguro de solicitar la cotización?");
+      (async () => {
+        const confirmacion = await Swal.fire({
+          title: 'Seguro?',
+          text: "¿Está seguro de solicitar la cotización?",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#0b5ed7',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Aceptar',
+          cancelButtonText: 'Cancelar'
+        });
   
-      if (confirmacion) {
-        this.guardarDatos();
-      }
+        if (confirmacion.isConfirmed) {
+          this.guardarDatos();
+        }
+      })()
     }
   }
 
@@ -310,7 +321,13 @@ export class SolicitarCotizacionComponent {
           },
           (error) => {
             console.error('Error al registrar el área común:', error);
-            alert("Error al registrar el área común: " + error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error al registrar el área común.',
+              confirmButtonColor: '#0b5ed7',
+              confirmButtonText: 'Aceptar',
+            });
           }
         );
       }else{
@@ -371,13 +388,24 @@ export class SolicitarCotizacionComponent {
         this.solicitudService.cant_plimpieza = limpieza;
         this.solicitudService.cant_vigilantes = seguridad;
 
-        alert('Solicitud de administracion hecha de forma correcta:');
-
+        Swal.fire({
+          icon: 'success',
+          title: 'Correcto',
+          text: 'Solicitud de administracion hecha de forma correcta.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
         this.router.navigateByUrl('/formato-solicitud');
       },
       (error) => {
         console.error('Error al insertar la solicitud:', error);
-        alert("Error al registrar la solicitud de administracion: " + error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al registrar la solicitud de administracion.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
       }
     );   
   }
