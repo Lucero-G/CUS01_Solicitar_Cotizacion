@@ -4,6 +4,7 @@ import { ConexionService } from 'src/app/services/conexion.service';
 import { NombreUsuarioService } from 'src/app/services/nombre-usuario.service';
 import { PredioService } from 'src/app/services/predio.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-predio',
@@ -171,7 +172,13 @@ export class RegistrarPredioComponent{
     this.conexion.addPredio(predioData).subscribe(
       (predioNuevo: any) => {
         console.log('Predio insertado correctamente:', predioNuevo);
-        alert("Predio registrado con éxito");
+        Swal.fire({
+          icon: 'success',
+          title: 'Registrado',
+          text: 'Predio registrado con éxito.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
         this.predioService.updateIdPredio(predioNuevo['data'].id_predio);
         this.predioService.updateNombrePredio(predioNuevo['data'].descripcion);
         this.terminarRegistro();
@@ -179,7 +186,13 @@ export class RegistrarPredioComponent{
       },
       (error) => {
         console.error('Error al insertar el predio:', error);
-        alert("Error al registrar el predio: " + error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al registrar el predio.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
       }
     );
   }
