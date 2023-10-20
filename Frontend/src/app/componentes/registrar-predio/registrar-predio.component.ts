@@ -157,6 +157,7 @@ export class RegistrarPredioComponent{
     const correoElectronico = (<HTMLInputElement>document.getElementById('correoElectronico')).value;
     const direccion = (<HTMLInputElement>document.getElementById('direccion')).value;
     const codigoPostal = (<HTMLInputElement>document.getElementById('codigoPostal')).value;
+    alert(direccion + "," + codigoPostal);
 
     const predioData = {
       id_tipo_predio: tipoPredio,
