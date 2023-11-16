@@ -124,35 +124,37 @@ export class FormatoSolicitudComponent {
     doc.setFont(font, 'normal')
     doc.text(String(this.areaAreasComunes) + ' m² total (' + String(this.cantAreasComunes) + ')', 80, contenidoY + 70);
   
-   // Dibujar el rectángulo alrededor del detalle de áreas comunes
-  const areasComunesX = 10;
-  const areasComunesY = contenidoY + 80;
-  const areasComunesWidth = 180;
-  const areasComunesHeight = 60;
-  doc.rect(areasComunesX, areasComunesY, areasComunesWidth, areasComunesHeight, 'S');
+// Calcular la altura necesaria para el rectángulo de áreas comunes
+const areasComunesRectHeight = 20 + this.areasComunes.length * 20; // Ajusta según la altura deseada por área común
 
-  // Mostrar el título del detalle de áreas comunes
-  doc.setFont(font, 'bold');
-  doc.setFontSize(16);
-  doc.text('Detalle de áreas comunes', areasComunesX + 5, areasComunesY + 10);
-  
-  
-  // Mostrar cada área común dentro del rectángulo
-  let areaComunY = areasComunesY + 20;
-  doc.setFontSize(fontSize);
-  this.areasComunes.forEach((ac) => {
-    doc.setFont(font, 'bold')
-    doc.text('Tipo de Área Común:', areasComunesX + 10, areaComunY);
-    doc.setFont(font, 'normal')
-    doc.text(ac.nombre, areasComunesX + 50, areaComunY);
+// Dibujar el rectángulo alrededor del detalle de áreas comunes
+const areasComunesX = 10;
+const areasComunesY = contenidoY + 80;
+const areasComunesWidth = 180;
+const areasComunesHeight = areasComunesRectHeight; // Ajustar la altura dinámicamente
+doc.rect(areasComunesX, areasComunesY, areasComunesWidth, areasComunesHeight, 'S');
 
-    doc.setFont(font, 'bold')
-    doc.text('Área en m²:', areasComunesX + 10, areaComunY + 10);
-    doc.setFont(font, 'normal')
-    doc.text(ac.area, areasComunesX + 50, areaComunY + 10);
+// Mostrar el título del detalle de áreas comunes
+doc.setFont(font, 'bold');
+doc.setFontSize(16);
+doc.text('Detalle de áreas comunes', areasComunesX + 5, areasComunesY + 10);
 
-    areaComunY += 20;
-  });
+// Mostrar cada área común dentro del rectángulo
+let areaComunY = areasComunesY + 20;
+doc.setFontSize(fontSize);
+this.areasComunes.forEach((ac) => {
+  doc.setFont(font, 'bold')
+  doc.text('Tipo de Área Común:', areasComunesX + 10, areaComunY);
+  doc.setFont(font, 'normal')
+  doc.text(ac.nombre, areasComunesX + 50, areaComunY);
+
+  doc.setFont(font, 'bold')
+  doc.text('Área en m²:', areasComunesX + 10, areaComunY + 10);
+  doc.setFont(font, 'normal')
+  doc.text(ac.area, areasComunesX + 50, areaComunY + 10);
+
+  areaComunY += 20;
+});
 
   
     // Guardar el PDF
