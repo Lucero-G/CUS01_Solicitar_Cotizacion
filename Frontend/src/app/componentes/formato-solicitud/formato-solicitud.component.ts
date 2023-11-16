@@ -135,13 +135,14 @@ export class FormatoSolicitudComponent {
   doc.setFont(font, 'bold');
   doc.setFontSize(16);
   doc.text('Detalle de áreas comunes', areasComunesX + 5, areasComunesY + 10);
-
+  
+  
   // Mostrar cada área común dentro del rectángulo
   let areaComunY = areasComunesY + 20;
   doc.setFontSize(fontSize);
   this.areasComunes.forEach((ac) => {
     doc.setFont(font, 'bold')
-    doc.text('Nombre:', areasComunesX + 10, areaComunY);
+    doc.text('Tipo de Área Común:', areasComunesX + 10, areaComunY);
     doc.setFont(font, 'normal')
     doc.text(ac.nombre, areasComunesX + 50, areaComunY);
 
