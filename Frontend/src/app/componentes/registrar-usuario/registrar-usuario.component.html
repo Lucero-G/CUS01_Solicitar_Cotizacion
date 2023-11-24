@@ -92,11 +92,16 @@
                         <label for="">Código postal:</label>
                     </div>
                     <div class="col-6">
+                        <select class="form-control form-select" id="codigoPostal" formControlName="codigoPostal" [class.is-invalid]="codigoPostalNoValido" required>
+                            <option *ngFor="let c of ubigeo" value="{{c.idubigeo}}">{{c.idubigeo}} - {{c.departamento}} - {{c.provincia}} - {{c.distrito}}</option>
+                        </select>
+                        <small *ngIf="codigoPostalNoValido" class="text-danger">Seleccione un código postal</small></div>
+                    <!-- div class="col-6">
                         <ng-select class="" style="font-size: 16px;" id="codigoPostal" formControlName="codigoPostal" [class.is-invalid] = "codigoPostalNoValido">
                             <ng-option *ngFor="let c of ubigeo" value="{{c.idubigeo}}">{{c.idubigeo}} - {{c.departamento}} - {{c.provincia}} - {{c.distrito}}</ng-option>
                         </ng-select>
                         <small *ngIf="codigoPostalNoValido" class="text-danger">Seleccione un código postal</small>
-                    </div>
+                    </div-->
                 </div>
 
                 <div class="row mb-5">

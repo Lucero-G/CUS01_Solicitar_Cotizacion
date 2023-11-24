@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConexionService } from 'src/app/services/conexion.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registrar-usuario',
@@ -125,18 +126,36 @@ export class RegistrarUsuarioComponent {
 
       this.conexion.addSolicitante(solicitanteData).subscribe((result: any) =>{
         console.log("Solicitante añadido correctamente:", result);
-        alert("Registro Exitoso");
+        Swal.fire({
+          icon: 'success',
+          title: 'Registrado',
+          text: 'Solicitante añadido correctamente.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
         this.router.navigateByUrl('/');
       },
       (error) => {
         console.error('Error al registrar al solicitante:', error);
-        alert("Error de registro: " + error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al registrar al solicitante.',
+          confirmButtonColor: '#0b5ed7',
+          confirmButtonText: 'Aceptar',
+        });
       });
 
     },
     (error) =>{
       console.error('Error al registrar a la persona:', error);
-      alert("Error de registro: " + error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error al registrar a la persona.',
+        confirmButtonColor: '#0b5ed7',
+        confirmButtonText: 'Aceptar',
+      });
     });
 
   }
